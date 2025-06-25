@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Gebäude Bilanzierer{% endblock %}</title>
+    
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    
+    {% block extra_css %}{% endblock %}
+</head>
+<body>
+    <!-- Header with Navigation -->
+    <header>
+        <nav>
+            <ul>
+                <li><a href="{% url 'startseite' %}" {% if request.resolver_match.url_name == 'startseite' %}class="active"{% endif %}>Home</a></li>
+                <li><a href="{% url 'allg_angaben' %}" {% if 'allg' in request.resolver_match.url_name %}class="active"{% endif %}>Berechnung</a></li>
+                <li><a href="{% url 'uber_tool' %}" {% if request.resolver_match.url_name == 'uber_tool' %}class="active"{% endif %}>Über das Tool</a></li>
+                <li><a href="{% url 'entwicklerteam' %}" {% if request.resolver_match.url_name == 'entwicklerteam' %}class="active"{% endif %}>Team</a></li>
+                <li><a href="{% url 'kontakt' %}" {% if request.resolver_match.url_name == 'kontakt' %}class="active"{% endif %}>Kontakt</a></li>
+                <li><a href="{% url 'hilfe' %}" {% if request.resolver_match.url_name == 'hilfe' %}class="active"{% endif %}>Hilfe</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="gjs-plg-flex-row">
+            <div class="gjs-plg-flex-column">
+                <img src="{% static 'images/Logo.png' %}" alt="Logo" class="logo">
+            </div>
+            <div class="gjs-plg-flex-column">
+                <p>&copy; 2025 Gebäude Bilanzierer. Alle Rechte vorbehalten.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="{% static 'js/calculations.js' %}"></script>
+    {% block extra_js %}{% endblock %}
+</body>
+</html>

@@ -1,0 +1,10 @@
+Bauteil,Fx
+"Außenwand, Fenster, Decke über Außenluft",1
+Dach (als Systemgrenze),1
+Dachgeschossdecke (Dachraum nicht ausgebaut),0.8
+Wände und Decken zu Abseiten (Drempel),0.8
+Wände und Decken zu unbeheizten Räumen,0.5
+Wände und Decken zu niedrig beheizten Räumen (12 °C und 19°C),0.35
+Einfachverglasung,0.8
+Zweischeibenverglasung,0.7
+Wärmeschutzverglasung,0.5
