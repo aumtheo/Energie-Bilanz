@@ -23,16 +23,16 @@ def api_berechnung(request):
             data = json.loads(request.body)
             params = data
         
-        # Extract building parameters
+        # Extract building parameters with defaults
         laenge = float(params.get("laenge", 0))
         breite = float(params.get("breite", 0))
-        geschosshoehe = float(params.get("geschosshoehe", 0))
-        anz_geschosse = int(params.get("anz_geschosse", 0))
+        geschosshoehe = float(params.get("geschosshoehe", 2.7))
+        anz_geschosse = int(params.get("anz_geschosse", 1))
         
         # Calculate building data
         geb = berechne_gebaeudedaten(laenge, breite, geschosshoehe, anz_geschosse)
         
-        # Extract energy parameters
+        # Extract energy parameters with defaults
         nf = geb["nf"]
         heiz = float(params.get("jahres_heizbedarf", 0))
         ww = float(params.get("tw_pro_m2", 0))
@@ -58,60 +58,6 @@ def api_berechnung(request):
             "strombedarf": sb,
             "waermebedarf": wb,
             "endenergie": ee,
-        })
-        
-    except Exception as e:
-        return JsonResponse({
-            "success": False,
-            "error": str(e)
-        }, status=400)
-
-@csrf_exempt
-@require_http_methods(["POST"])
-def api_save_project(request):
-    """
-    API endpoint to save project data
-    """
-    try:
-        data = json.loads(request.body)
-        
-        # Here you would save the project data to the database
-        # For now, we'll just return success
-        
-        return JsonResponse({
-            "success": True,
-            "message": "Project saved successfully",
-            "project_id": 1  # Would be the actual saved project ID
-        })
-        
-    except Exception as e:
-        return JsonResponse({
-            "success": False,
-            "error": str(e)
-        }, status=400)
-
-@csrf_exempt
-@require_http_methods(["GET"])
-def api_climate_data(request):
-    """
-    API endpoint to get climate data for a specific location
-    """
-    try:
-        location = request.GET.get('location', '')
-        
-        # Here you would query your climate data
-        # For now, return sample data
-        
-        return JsonResponse({
-            "success": True,
-            "location": location,
-            "temperature_data": {
-                "jan": 2.1, "feb": 2.8, "mar": 5.4,
-                "apr": 8.8, "mai": 13.1, "jun": 16.2,
-                "jul": 18.0, "aug": 17.8, "sep": 14.8,
-                "okt": 10.8, "nov": 6.2, "dez": 3.2,
-                "jahreswert": 9.9
-            }
         })
         
     except Exception as e:
